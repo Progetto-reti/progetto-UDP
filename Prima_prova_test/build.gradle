@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
+ext {
+    junitJupiterVersion = '5.9.2'
+    jqwikVersion = '1.8.2'
+}
+
+dependencies {
+    implementation 'org.jetbrains:annotations:24.0.0'
+    testImplementation platform('org.junit:junit-bom:' + junitJupiterVersion)
+    testImplementation 'org.junit.jupiter:junit-jupiter:' + junitJupiterVersion
+    testImplementation 'net.jqwik:jqwik:' + jqwikVersion
+    testImplementation 'org.assertj:assertj-core:3.23.1'
+    compileOnly 'org.jetbrains:annotations:23.0.0' // Optional but recommended for annotation related API warnings
+    testImplementation platform('org.junit:junit-bom:' + junitJupiterVersion)
+    testImplementation 'org.junit.jupiter:junit-jupiter:' + junitJupiterVersion
+    testImplementation 'net.jqwik:jqwik:' + jqwikVersion
+}
+
+test {
+    useJUnitPlatform {
+        includeEngines 'junit-jupiter', 'jqwik'
+    }
+
+}
+
+
